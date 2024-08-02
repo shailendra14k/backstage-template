@@ -75,6 +75,36 @@ spec:
           title: OpenShift Cluster Domain
           type: string
           default: apps.shailendra14k.in
+  - title: Application repository Information
+    required:
+      - repo
+    properties:
+     repo:
+       title: Repository Location
+       type: object
+       properties:
+          host:
+            title: Repo Host
+            type: string
+            description: Your SCM host
+            default: gitlab-gitlab.apps.cluster-pxnsw.sandbox424.opentlc.com
+            enum:
+              - gitlab-gitlab.apps.cluster-pxnsw.sandbox424.opentlc.com
+          owner:
+            title: Repo Owner
+            type: string
+            description: Your SCM host organization/group
+            default: development
+            enum:
+              - development
+          verify_commits:
+            title: Verify Commits
+            type: string
+            description: Verify Git repository commits using Red Hat’s Trusted Artifact Signer (TAS) service
+            default: disabled
+            enum:
+              - enabled
+              - disabled
   steps:
     - id: sourceCodeTemplate
       name: Generating the Source Code Component
@@ -89,6 +119,7 @@ spec:
           javaPackage: ${{ parameters.javaPackage }}
           apiPath: ${{ parameters.apiPath }}
           namespace: ${{ parameters.namespace }}
+          owner: ${{ user.entity.metadata.name }}
 
     - id: publish
       name: Publishing to the Source Code Repository
