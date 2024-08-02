@@ -1,0 +1,30 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ${{ values.appName }}
+  title: ${{ values.appName }}
+  annotations:
+    janus-idp.io/tekton: ${{ values.appName }}
+    tektonci/build-namespace: ${{ values.namespace }}
+    github.com/project-slug: ${{ values.orgName }}/${{ values.appName }}
+    backstage.io/kubernetes-id: ${{ values.appName }}
+    argocd/app-name: ${{ values.appName }}
+    prometheus.io/rule: container_memory_usage_bytes{pod=~"${{ values.appName }}-.*"}|pod,rate(container_cpu_usage_seconds_total{pod=~"${{ values.appName }}-.*"}[5m])|pod
+  links:
+    - url: https://devspaces${{values.cluster}}/#https://${{values.host}}/${{values.destination}}
+      title: OpenShift Dev Spaces (VS Code)
+      icon: web
+    - url: https://devspaces${{values.cluster}}/#https://${{values.host}}/${{values.destination}}?che-editor=che-incubator/che-idea/latest
+      title: OpenShift Dev Spaces (JetBrains IntelliJ)
+      icon: web
+  tags:
+    - spring-boot
+    - java
+    - maven
+    - tekton
+    - argocd
+    - renovate
+spec:
+  type: service
+  owner: shsingh
+  lifecycle: experimental
