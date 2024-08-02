@@ -92,12 +92,9 @@ spec:
 
     - id: publish
       name: Publishing to the Source Code Repository
-      action: publish:github
+      action: publish:gitlab
       input:
-        allowedHosts: ['github.com']
-        description: ${{ parameters.description }}
-        repoUrl: github.com?owner=${{ parameters.orgName }}&repo=${{ parameters.appName }}
-        defaultBranch: ${{ parameters.repoBranchName }}
+        repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.component_id}}"
         repoVisibility: public
 
     - id: register
