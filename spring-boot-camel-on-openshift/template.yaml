@@ -19,6 +19,7 @@ spec:
   parameters:
     - title: Provide information about the new component
       required:
+        - component_id
         - orgName
         - appName
         - domainName
@@ -41,7 +42,7 @@ spec:
         orgName:
           title: Organization name
           type: string
-          default: shsingh
+          default: shsingh1
         appName:
           title: App name
           type: string
@@ -129,7 +130,6 @@ spec:
           namespace: ${{ parameters.namespace }}
           owner: ${{ user.entity.metadata.name }}
           
-
     - id: publish
       name: Publishing to the Source Code Repository
       action: publish:gitlab
