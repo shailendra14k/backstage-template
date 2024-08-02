@@ -114,6 +114,7 @@ spec:
         values:
           orgName: ${{ parameters.orgName }}
           appName: ${{ parameters.appName }}
+          component_id: ${{ parameters.component_id }}
           domainName: ${{ parameters.domainName }}
           groupId: ${{ parameters.groupId }}
           javaPackage: ${{ parameters.javaPackage }}
@@ -125,7 +126,7 @@ spec:
       name: Publishing to the Source Code Repository
       action: publish:gitlab
       input:
-        repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.component_id}}"
+        repoUrl: "${{ parameters.repo.host }}?owner=shsingh&repo=${{parameters.orgName}"
         repoVisibility: public
 
     - id: register
