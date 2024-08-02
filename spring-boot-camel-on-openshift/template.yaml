@@ -83,7 +83,6 @@ spec:
           title: OpenShift Cluster Domain
           type: string
           default: apps.shailendra14k.in
-
     - title: Application repository Information
       required:
         - repo
