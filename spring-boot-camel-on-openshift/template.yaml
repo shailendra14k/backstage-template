@@ -31,6 +31,13 @@ spec:
         - registryUrl
         - clusterDomain
       properties:
+        component_id:
+          title: Name
+          type: string
+          description: Unique name of the component
+          default: my-quarkus-app
+          ui:field: EntityNamePicker
+          maxLength: 23
         orgName:
           title: Organization name
           type: string
@@ -121,12 +128,13 @@ spec:
           apiPath: ${{ parameters.apiPath }}
           namespace: ${{ parameters.namespace }}
           owner: ${{ user.entity.metadata.name }}
+          
 
     - id: publish
       name: Publishing to the Source Code Repository
       action: publish:gitlab
       input:
-        repoUrl: "${{ parameters.repo.host }}?owner=shsingh&repo=${{parameters.orgName}"
+        repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.orgName }}&repo=${{ parameters.component_id }"
         repoVisibility: public
 
     - id: register
@@ -151,17 +159,6 @@ spec:
           git_owner: ${{ parameters.repo.owner }}
         targetPath: ./gitops
 
-    - id: publish
-      name: Publishing to the Config Code Repository
-      action: publish:github
-      input:
-        allowedHosts: ['github.com']
-        description: ${{ parameters.description }}
-        repoUrl: github.com?owner=${{ parameters.orgName }}&repo=${{ parameters.component_id }}-config
-        defaultBranch: ${{ parameters.repoBranchName }}
-        sourcePath: ./gitops
-        repoVisibility: public
-
     - id: create-argocd-resources
       name: Create ArgoCD Resources
       action: argocd:create-resources
@@ -169,7 +166,7 @@ spec:
         appName: ${{ parameters.appName }}
         argoInstance: main
         namespace: ${{ parameters.namespace }}
-        repoUrl: https://github.com/${{ parameters.orgName }}/${{ parameters.appName }}-config.git
+        repoUrl: https://gitlab-gitlab.apps.cluster-pxnsw.sandbox424.opentlc.com${{ parameters.orgName }}/${{ parameters.appName }}-config.git
         path: 'manifests'
 
     - id: create-webhook
