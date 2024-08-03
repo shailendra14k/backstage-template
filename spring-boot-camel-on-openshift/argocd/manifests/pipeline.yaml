@@ -27,7 +27,7 @@ spec:
       params:
         - name: GOALS
           value:
-            - test
+            - package
         - name: PROXY_PROTOCOL
           value: http
         - name: CONTEXT_DIR

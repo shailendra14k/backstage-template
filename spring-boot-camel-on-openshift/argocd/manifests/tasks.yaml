@@ -91,7 +91,7 @@ spec:
       type: string
   steps:
     - args:
-        - '-s'
+        - '-Dmaven.test.skip=true'
         - $(params.GOALS)
       command:
         - /usr/bin/mvn
