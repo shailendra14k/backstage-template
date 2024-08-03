@@ -4,12 +4,14 @@ metadata:
   name: ${{ values.appName }}
   title: ${{ values.appName }}
   annotations:
-    janus-idp.io/tekton: ${{ values.appName }}
-    tektonci/build-namespace: ${{ values.namespace }}
-    github.com/project-slug: ${{ values.orgName }}/${{ values.appName }}
-    backstage.io/kubernetes-id: ${{ values.appName }}
-    argocd/app-name: ${{ values.appName }}
-    prometheus.io/rule: container_memory_usage_bytes{pod=~"${{ values.appName }}-.*"}|pod,rate(container_cpu_usage_seconds_total{pod=~"${{ values.appName }}-.*"}[5m])|pod
+    argocd/app-selector: rht-gitops.com/janus-argocd=${{values.component_id}}-bootstrap
+    backstage.io/kubernetes-id: ${{values.component_id}}
+    janus-idp.io/tekton: ${{values.component_id}}
+    backstage.io/source-location: url:https://${{values.host}}/${{values.destination}}
+    backstage.io/techdocs-ref: url:https://${{values.host}}/${{values.destination}}
+    gitlab.com/project-slug: ${{values.destination}}
+    quay.io/repository-slug: ${{values.quay_destination | dump}
+
   links:
     - url: https://devspaces${{values.cluster}}/#https://${{values.host}}/${{values.destination}}
       title: OpenShift Dev Spaces (VS Code)
