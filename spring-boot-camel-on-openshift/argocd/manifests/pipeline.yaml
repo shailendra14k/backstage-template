@@ -40,6 +40,8 @@ spec:
       workspaces:
         - name: source
           workspace: source-dir
+        - name: maven
+          workspace: mvn-dir
     - name: get-version
       params:
         - name: CONTEXT_DIR
@@ -52,8 +54,6 @@ spec:
       workspaces:
         - name: source
           workspace: source-dir
-        - name: maven
-          workspace: mvn-dir
     - name: s2i-java
       params:
         - name: PATH_CONTEXT
