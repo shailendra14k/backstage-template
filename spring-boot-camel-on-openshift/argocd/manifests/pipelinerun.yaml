@@ -16,5 +16,5 @@ spec:
       persistentVolumeClaim:
         claimName: ${{ values.appName }}
     - name: mvn-dir
-            persistentVolumeClaim:
-              claimName: ${{ values.appName }}-maven
+      persistentVolumeClaim:
+        claimName: ${{ values.appName }}-maven
