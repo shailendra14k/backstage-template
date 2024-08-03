@@ -12,7 +12,7 @@ spec:
     - name: git-clone
       params:
         - name: url
-          value: 'https://github.com/${{ values.orgName }}/${{ values.appName }}.git'
+          value: 'https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.component_id}.git'
         - name: revision
           value: $(params.git-revision)
         - name: sslVerify
@@ -40,30 +40,12 @@ spec:
       workspaces:
         - name: source
           workspace: source-dir
-        - name: maven-settings
-          workspace: maven-settings
-    - name: sonarqube
-      params:
-        - name: SONAR_HOST_URL
-          value: 'https://sonarcloud.io'
-        - name: SONAR_PROJECT_KEY
-          value: ${{ values.appName }}
-      runAfter:
-        - maven
-      taskRef:
-        kind: Task
-        name: sonarqube-scanner
-      workspaces:
-        - name: source
-          workspace: source-dir
-        - name: sonar-settings
-          workspace: sonar-settings
     - name: get-version
       params:
         - name: CONTEXT_DIR
           value: .
       runAfter:
-        - sonarqube
+        - maven
       taskRef:
         kind: Task
         name: maven-get-project-version
@@ -91,5 +73,3 @@ spec:
           workspace: source-dir
   workspaces:
     - name: source-dir
-    - name: maven-settings
-    - name: sonar-settings
