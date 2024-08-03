@@ -160,6 +160,14 @@ spec:
           git_owner: ${{ parameters.repo.owner }}
         targetPath: ./gitops
 
+    - id: publish
+      name: Publishing to the Config Code Repository
+      action: publish:gitlab
+      input:
+       repoUrl: "${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.component_id}}-config"
+       repoVisibility: public
+       sourcePath: ./gitops
+
     - id: create-argocd-resources
       name: Create ArgoCD Resources
       action: argocd:create-resources
