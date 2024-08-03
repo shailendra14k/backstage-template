@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: ${{ values.appName }}
   annotations:
-    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":${{ values.appName }}":1.0","namespace":"demo"},"fieldPath":"spec.template.spec.containers[?(@.name==${{ values.appName }})].image","pause":"false"}]'
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"${{ values.appName }}:1.0","namespace":"demo"},"fieldPath":"spec.template.spec.containers[?(@.name==\"${{ values.appName }}\")].image","pause":"false"}]'
   labels:
     app: ${{ values.appName }}
     backstage.io/kubernetes-id: ${{ values.appName }}
