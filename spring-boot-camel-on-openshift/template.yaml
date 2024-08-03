@@ -122,7 +122,7 @@ spec:
         url: ./skeleton
         values:
           orgName: ${{ parameters.orgName }}
-          appName: ${{ parameters.appName }}
+          appName: ${{ parameters.component_id }}
           component_id: ${{ parameters.component_id }}
           domainName: ${{ parameters.domainName }}
           groupId: ${{ parameters.groupId }}
@@ -157,7 +157,7 @@ spec:
         values:
           component_id: ${{ parameters.component_id }}
           orgName: ${{ parameters.orgName }}
-          appName: ${{ parameters.appName }}
+          appName: ${{ parameters.component_id }}
           registryUrl: ${{ parameters.registryUrl }}
           namespace: ${{ parameters.namespace }}
           repoBranchName: ${{ parameters.repoBranchName }}
@@ -179,7 +179,7 @@ spec:
         appName: ${{ parameters.component_id }}
         argoInstance: main
         namespace: ${{ parameters.namespace }}
-        repoUrl: https://${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.component_id}}-config.git
+        repoUrl: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.component_id}}-config.git
         path: 'argocd/'
 
   output:
