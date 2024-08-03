@@ -176,11 +176,11 @@ spec:
       name: Create ArgoCD Resources
       action: argocd:create-resources
       input:
-        appName: ${{ parameters.appName }}
+        appName: ${{ parameters.component_id }}
         argoInstance: main
         namespace: ${{ parameters.namespace }}
         repoUrl: https://${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.component_id}}-config.git
-        path: 'manifests'
+        path: 'argocd/'
 
   output:
     links:
