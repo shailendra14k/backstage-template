@@ -130,6 +130,10 @@ spec:
           apiPath: ${{ parameters.apiPath }}
           namespace: ${{ parameters.namespace }}
           owner: ${{ user.entity.metadata.name }}
+          cluster: .apps.cluster-pxnsw.sandbox424.opentlc.com
+          host: ${{ parameters.repo.host }}
+          destination: ${{ parameters.repo.owner }}/${{ parameters.component_id }}
+
           
     - id: publish
       name: Publishing to the Source Code Repository
