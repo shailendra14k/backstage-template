@@ -148,6 +148,7 @@ spec:
     - id: configCodeTemplate
       name: Generating the Config Code Component
       action: fetch:template
+      input:
         url: ../../skeletons/argocd
         values:
           component_id: ${{ parameters.component_id }}
