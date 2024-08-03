@@ -27,6 +27,9 @@ spec:
           - name: source-dir
             persistentVolumeClaim:
               claimName: ${{ values.appName }}
+          - name: mvn-dir
+            persistentVolumeClaim:
+              claimName: ${{ values.appName }}-maven
 ---
 apiVersion: triggers.tekton.dev/v1alpha1
 kind: EventListener
