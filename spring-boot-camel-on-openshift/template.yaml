@@ -184,13 +184,6 @@ spec:
         repoUrl: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.component_id}}-config.git
         path: 'argocd'
 
-    - id: create-webhook
-      name: Create Gitlab Webhook
-      action: webhook:gitlab
-      input:
-        repoUrl: ${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.component_id}}
-        webhookUrl: https://el-${{ parameters.appName }}-${{ parameters.namespace }}.${{ parameters.clusterDomain }}
-
   output:
     links:
       - title: Open the Source Code Repository
