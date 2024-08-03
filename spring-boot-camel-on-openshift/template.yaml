@@ -162,6 +162,7 @@ spec:
           namespace: ${{ parameters.namespace }}
           repoBranchName: ${{ parameters.repoBranchName }}
           git_owner: ${{ parameters.repo.owner }}
+          repoUrl: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.component_id}}-config.git
         targetPath: ./gitops
 
     - id: publish-gitops
@@ -180,7 +181,7 @@ spec:
         argoInstance: main
         namespace: ${{ parameters.namespace }}
         repoUrl: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.component_id}}-config.git
-        path: 'manifests'
+        path: 'argocd'
 
   output:
     links:
