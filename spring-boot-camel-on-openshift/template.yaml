@@ -186,7 +186,7 @@ spec:
 
     - id: create-webhook
       name: Create Gitlab Webhook
-      action: gitlab:webhook
+      action: webhook:gitlab
       input:
         repoUrl: ${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.component_id}}
         webhookUrl: https://el-${{ parameters.appName }}-${{ parameters.namespace }}.${{ parameters.clusterDomain }}

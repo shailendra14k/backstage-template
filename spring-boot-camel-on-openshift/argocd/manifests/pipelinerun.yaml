@@ -13,10 +13,5 @@ spec:
   serviceAccountName: pipeline
   workspaces:
     - name: source-dir
-      volumeClaimTemplate:
-        spec:
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: 1Gi
+      persistentVolumeClaim:
+        claimName: ${{ values.appName }}
