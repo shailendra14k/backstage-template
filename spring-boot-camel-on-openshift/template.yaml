@@ -174,16 +174,9 @@ spec:
       input:
         appName: ${{ parameters.appName }}
         argoInstance: main
-        namespace: ${{ parameters.namespace }}
-        repoUrl: https://gitlab-gitlab.apps.cluster-pxnsw.sandbox424.opentlc.com${{ parameters.orgName }}/${{ parameters.appName }}-config.git
-        path: 'manifests'
-
-    - id: create-webhook
-      name: Create GitHub Webhook
-      action: github:webhook
-      input:
-        repoUrl: github.com?repo=${{ parameters.appName }}&owner=${{ parameters.orgName }}
-        webhookUrl: https://el-${{ parameters.appName }}-${{ parameters.namespace }}.${{ parameters.clusterDomain }}
+        namespace: janus-argocd
+        repoUrl: https://${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.component_id}}-config.git
+        path: 'argocd/'
 
   output:
     links:
