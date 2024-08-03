@@ -35,8 +35,8 @@ spec:
       runAfter:
         - git-clone
       taskRef:
-        kind: ClusterTask
-        name: maven
+        kind: Task
+        name: maven-java21
       workspaces:
         - name: source
           workspace: source-dir
