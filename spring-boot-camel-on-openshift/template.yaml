@@ -82,7 +82,7 @@ spec:
         clusterDomain:
           title: OpenShift Cluster Domain
           type: string
-          default: apps.shailendra14k.in
+          default: apps.cluster-pxnsw.sandbox424.opentlc.com
     - title: Application repository Information
       required:
         - repo
@@ -183,6 +183,13 @@ spec:
         namespace: janus-argocd
         repoUrl: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.component_id}}-config.git
         path: 'argocd'
+
+    - id: create-webhook
+      name: Create Gitlab Webhook
+      action: gitlab:webhook
+      input:
+        repoUrl: ${{ parameters.repo.host }}?owner=${{ parameters.repo.owner }}&repo=${{parameters.component_id}}
+        webhookUrl: https://el-${{ parameters.appName }}-${{ parameters.namespace }}.${{ parameters.clusterDomain }}
 
   output:
     links:
