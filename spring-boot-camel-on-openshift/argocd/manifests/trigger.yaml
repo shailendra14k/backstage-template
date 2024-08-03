@@ -37,7 +37,7 @@ spec:
   triggers:
     - bindings:
         - kind: ClusterTriggerBinding
-          ref: github-push
+          ref: gitlab-push
       name: trigger-1
       template:
         ref: ${{ values.appName }}
