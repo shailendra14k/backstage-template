@@ -179,7 +179,7 @@ spec:
       input:
         appName: ${{ parameters.component_id }}
         argoInstance: main
-        namespace: ${{ parameters.namespace }}
+        namespace: janus-argocd
         repoUrl: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.component_id}}-config.git
         path: 'argocd'
 
