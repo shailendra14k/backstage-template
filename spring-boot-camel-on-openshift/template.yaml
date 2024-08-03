@@ -119,7 +119,7 @@ spec:
       name: Generating the Source Code Component
       action: fetch:template
       input:
-        url: ./skeleton
+        url: ./skeleton1
         values:
           orgName: ${{ parameters.orgName }}
           appName: ${{ parameters.appName }}
@@ -148,7 +148,6 @@ spec:
     - id: configCodeTemplate
       name: Generating the Config Code Component
       action: fetch:template
-      input:
         url: ../../skeletons/argocd
         values:
           component_id: ${{ parameters.component_id }}
