@@ -160,7 +160,7 @@ spec:
           git_owner: ${{ parameters.repo.owner }}
         targetPath: ./gitops
 
-    - id: publish
+    - id: publish-gitops
       name: Publishing to the Config Code Repository
       action: publish:gitlab
       input:
