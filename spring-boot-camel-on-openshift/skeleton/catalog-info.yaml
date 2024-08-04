@@ -4,9 +4,9 @@ metadata:
   name: ${{ values.appName }}
   title: ${{ values.appName }}
   annotations:
-    argocd/app-selector: rht-gitops.com/janus-argocd=${{values.component_id}}
-    backstage.io/kubernetes-id: ${{values.component_id}}
-    janus-idp.io/tekton: ${{values.component_id}}
+    argocd/app-selector: rht-gitops.com/janus-argocd=${{values.appName}}
+    backstage.io/kubernetes-id: ${{values.appName}}
+    janus-idp.io/tekton: ${{values.appName}}
     backstage.io/source-location: url:https://${{values.host}}/${{values.destination}}
     backstage.io/techdocs-ref: url:https://${{values.host}}/${{values.destination}}
     gitlab.com/project-slug: ${{values.destination}}
