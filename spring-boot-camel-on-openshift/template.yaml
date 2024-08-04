@@ -20,7 +20,6 @@ spec:
     - title: Provide information about the new component
       required:
         - component_id
-        - orgName
         - repoBranchName
         - description
         - registryUrl
