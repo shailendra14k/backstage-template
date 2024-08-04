@@ -29,7 +29,7 @@ spec:
           title: Name
           type: string
           description: Unique name of the component
-          default: my-quarkus-app
+          default: camel-springboot-sample
           ui:field: EntityNamePicker
           maxLength: 23
         repoBranchName:
@@ -124,11 +124,11 @@ spec:
       name: Create ArgoCD Resources
       action: argocd:create-resources
       input:
-        appName: ${{ parameters.component_id }}
+        appName: ${{ parameters.component_id }}-bootstrap
         argoInstance: main
-        namespace: ${{ parameters.component_id }}
+        namespace: janus-argocd
         repoUrl: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.component_id}}-config.git
-        path: 'manifests'
+        path: 'argocd'
 
   output:
     links:
