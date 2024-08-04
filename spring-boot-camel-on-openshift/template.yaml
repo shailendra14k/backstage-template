@@ -21,13 +21,7 @@ spec:
       required:
         - component_id
         - orgName
-        - appName
-        - domainName
         - repoBranchName
-        - groupId
-        - javaPackage
-        - apiPath
-        - namespace
         - description
         - registryUrl
         - clusterDomain
@@ -39,38 +33,10 @@ spec:
           default: my-quarkus-app
           ui:field: EntityNamePicker
           maxLength: 23
-        orgName:
-          title: Organization name
-          type: string
-          default: shsingh1
-        appName:
-          title: App name
-          type: string
-          default: camel-spring-boot-app-openshift
-        domainName:
-          title: Name of the domain object
-          type: string
-          default: Person
         repoBranchName:
           title: Name of the branch in the Git repository
           type: string
           default: master
-        groupId:
-          title: Maven Group ID
-          type: string
-          default: com.demo
-        javaPackage:
-          title: Java package directory
-          type: string
-          default: pl/shsingh/services
-        apiPath:
-          title: REST API path
-          type: string
-          default: /api/v1
-        namespace:
-          title: The target namespace on Kubernetes
-          type: string
-          default: demo
         description:
           title: Description
           type: string
@@ -121,19 +87,11 @@ spec:
       input:
         url: ./skeleton
         values:
-          orgName: ${{ parameters.orgName }}
           appName: ${{ parameters.component_id }}
-          component_id: ${{ parameters.component_id }}
-          domainName: ${{ parameters.domainName }}
-          groupId: ${{ parameters.groupId }}
-          javaPackage: ${{ parameters.javaPackage }}
-          apiPath: ${{ parameters.apiPath }}
-          namespace: ${{ parameters.namespace }}
           owner: ${{ user.entity.metadata.name }}
           cluster: .apps.cluster-pxnsw.sandbox424.opentlc.com
           host: ${{ parameters.repo.host }}
           destination: ${{ parameters.repo.owner }}/${{ parameters.component_id }}
-
           
     - id: publish
       name: Publishing to the Source Code Repository
@@ -155,11 +113,8 @@ spec:
       input:
         url: ./argocd
         values:
-          component_id: ${{ parameters.component_id }}
-          orgName: ${{ parameters.orgName }}
           appName: ${{ parameters.component_id }}
           registryUrl: ${{ parameters.registryUrl }}
-          namespace: ${{ parameters.namespace }}
           repoBranchName: ${{ parameters.repoBranchName }}
           git_owner: ${{ parameters.repo.owner }}
           url: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.component_id}}.git
