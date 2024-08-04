@@ -134,9 +134,9 @@ spec:
       input:
         appName: ${{ parameters.component_id }}
         argoInstance: main
-        namespace: janus-argocd
+        namespace: ${{ parameters.component_id }}
         repoUrl: https://${{ parameters.repo.host }}/${{ parameters.repo.owner }}/${{parameters.component_id}}-config.git
-        path: 'argocd'
+        path: 'manifests'
 
   output:
     links:
