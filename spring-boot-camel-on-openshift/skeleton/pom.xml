@@ -4,7 +4,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>${{ values.groupId }}</groupId>
+  <groupId>com.redhat</groupId>
   <artifactId>${{ values.appName }}</artifactId>
   <packaging>jar</packaging>
    <version>1.0</version>
