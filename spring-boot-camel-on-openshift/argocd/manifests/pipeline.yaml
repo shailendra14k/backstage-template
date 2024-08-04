@@ -64,7 +64,7 @@ spec:
           value: 'false'
         - name: IMAGE
           value: >-
-            ${{ values.registryUrl }}/${{ values.namespace }}/${{ values.appName }}:$(tasks.get-version.results.version)
+            ${{ values.registryUrl }}/${{ values.appName }}/${{ values.appName }}:$(tasks.get-version.results.version)
       runAfter:
         - get-version
       taskRef:
