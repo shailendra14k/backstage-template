@@ -70,14 +70,6 @@ spec:
               default: development
               enum:
                 - development
-            verify_commits:
-              title: Verify Commits
-              type: string
-              description: Verify Git repository commits using Red Hat’s Trusted Artifact Signer (TAS) service
-              default: disabled
-              enum:
-                - enabled
-                - disabled
 
   steps:
     - id: sourceCodeTemplate
