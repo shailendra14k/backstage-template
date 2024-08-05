@@ -19,19 +19,19 @@ spec:
         image: quay.io/agnosticd/ee-multicloud:latest
         volumeMounts:
           - mountPath: /scripts
-            name: ${{ values.appName }-script-vol
+            name: ${{ values.appName }}-script-vol
           - mountPath: /tokens
             name: git-token
           - mountPath: /secrets
             name: webhook-secret
       restartPolicy: Never
       volumes:
-      - name: ${{ values.appName }-script-vol
+      - name: ${{ values.appName }}-script-vol
         configMap:
-          name: ${{ values.appName }-webhook-script
+          name: ${{ values.appName }}-webhook-script
       - name: git-token
         secret:
           secretName: ${{ values.appName }}-git-token
       - name: webhook-secret
         secret:
-          secretName: ${{ values.appName }-webhook-secret
+          secretName: ${{ values.appName }}-webhook-secret
