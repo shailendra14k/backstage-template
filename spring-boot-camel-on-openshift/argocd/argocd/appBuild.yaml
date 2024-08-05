@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ${{ values.appName | dump }}
+spec:
+  project: default
+  source:
+    path: manifests
+    repoURL: ${{ values.repoUrl }}
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ${{ values.appName }}
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+      - ApplyOutOfSyncOnly=true
+    retry:
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 10m
