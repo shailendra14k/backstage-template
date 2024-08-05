@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: ${{ values.appName }-webhook-job
+  name: ${{ values.appName }}-webhook-job
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 spec:
