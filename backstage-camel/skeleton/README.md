@@ -47,4 +47,3 @@ pluginRegistry:
 - Container Name ---> /azuredemoshsingh/test
 - Blob Name ---> {{blobName}}
 - Operation ---> uploadBlockBlob
-```
