@@ -96,6 +96,12 @@
 			<artifactId>camel-xj-starter</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.camel.springboot</groupId>
+			<artifactId>camel-servlet-starter</artifactId>
+		</dependency
+
+
 
 		<!-- Test -->
 		<dependency>
