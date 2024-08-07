@@ -2,9 +2,7 @@
     id: route-5711
     from:
       id: from-3753
-      uri: "timer://foo"
-      parameters:
-        period: "1000"
+      uri: rest:get:/demo
       steps:
         - setBody:
             simple: 'Hello World'
