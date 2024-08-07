@@ -1,0 +1,113 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: maven-get-project-version
+spec:
+  params:
+    - default: >-
+        image-registry.openshift-image-registry.svc:5000/openshift/java:latest
+      description: Maven base image
+      name: MAVEN_IMAGE
+      type: string
+    - default: .
+      description: >-
+        The context directory within the repository for sources on which we want
+        to execute maven goals.
+      name: CONTEXT_DIR
+      type: string
+  results:
+    - description: Project version read from pom.xml
+      name: version
+  steps:
+    - image: $(params.MAVEN_IMAGE)
+      name: mvn-command
+      resources: {}
+      script: >
+        #!/usr/bin/env bash
+
+        VERSION=$(/usr/bin/mvn help:evaluate -Dexpression=project.version -q
+        -DforceStdout)
+
+        echo -n $VERSION | tee $(results.version.path)
+      workingDir: $(workspaces.source.path)/$(params.CONTEXT_DIR)
+  workspaces:
+    - name: source
+---
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: maven-java21
+spec:
+  description: This Task can be used to run a Maven build.
+  params:
+    - default: 'registry.redhat.io/ubi8/openjdk-21@sha256:bb95ea866269ac8652f666ee1587d71f4f43da33493c2be7f6a9548bcfd2407c'
+      description: Maven base image
+      name: MAVEN_IMAGE
+      type: string
+    - default:
+        - package
+      description: maven goals to run
+      name: GOALS
+      type: array
+    - default: ''
+      description: The Maven repository mirror url
+      name: MAVEN_MIRROR_URL
+      type: string
+    - default: ''
+      description: The username for the server
+      name: SERVER_USER
+      type: string
+    - default: ''
+      description: The password for the server
+      name: SERVER_PASSWORD
+      type: string
+    - default: ''
+      description: The username for the proxy server
+      name: PROXY_USER
+      type: string
+    - default: ''
+      description: The password for the proxy server
+      name: PROXY_PASSWORD
+      type: string
+    - default: ''
+      description: Port number for the proxy server
+      name: PROXY_PORT
+      type: string
+    - default: ''
+      description: Proxy server Host
+      name: PROXY_HOST
+      type: string
+    - default: ''
+      description: Non proxy server host
+      name: PROXY_NON_PROXY_HOSTS
+      type: string
+    - default: http
+      description: Protocol for the proxy ie http or https
+      name: PROXY_PROTOCOL
+      type: string
+    - default: .
+      description: The context directory within the repository for sources on which we want to execute maven goals.
+      name: CONTEXT_DIR
+      type: string
+  steps:
+    - args:
+        - '-Dmaven.test.skip=true'
+        - '-Dmaven.repo.local=$(workspaces.maven.path)/.m2/repository'
+        - $(params.GOALS)
+      command:
+        - /usr/bin/mvn
+      env:
+        - name: HOME
+          value: /tekton/home
+      image: $(params.MAVEN_IMAGE)
+      name: mvn-goals
+      resources: {}
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+      workingDir: $(workspaces.source.path)/$(params.CONTEXT_DIR)
+  workspaces:
+    - description: The workspace consisting of maven project.
+      name: source
+    - description: The workspace consisting of maven project.
+      name: maven
