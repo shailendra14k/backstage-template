@@ -42,18 +42,6 @@ spec:
           workspace: source-dir
         - name: maven
           workspace: mvn-dir
-    - name: get-version
-      params:
-        - name: CONTEXT_DIR
-          value: .
-      runAfter:
-        - maven
-      taskRef:
-        kind: Task
-        name: maven-get-project-version
-      workspaces:
-        - name: source
-          workspace: source-dir
     - name: s2i-java
       params:
         - name: CONTEXT
@@ -64,9 +52,9 @@ spec:
           value: 'false'
         - name: IMAGE
           value: >-
-            ${{ values.registryUrl }}/${{ values.appName }}/${{ values.appName }}:$(tasks.get-version.results.version)
+            ${{ values.registryUrl }}/${{ values.appName }}/${{ values.appName }}:1.0
       runAfter:
-        - get-version
+        - maven
       taskRef:
         kind: ClusterTask
         name: buildah
