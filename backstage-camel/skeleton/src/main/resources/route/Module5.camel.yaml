@@ -19,7 +19,5 @@
     from:
       uri: "kafka:{{topicName.json}}?groupId={{consumergroup}}"
       steps:
-        - log:
-            message: "${body}"
         - to:
             uri: "azure-storage-blob://azuredemoshsingh/test?blobName={{blobName}}&operation=uploadBlockBlob"
