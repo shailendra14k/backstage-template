@@ -57,11 +57,11 @@ spec:
           description: Your SCM host gitlab-gitlab
           default: gitlab-gitlab
         owner:
-            title: Repo Owner
-            type: string
-            description: Your SCM host organization/group
-            default: development
-            enum:
+          title: Repo Owner
+          type: string
+          description: Your SCM host organization/group
+          default: development
+          enum:
               - development
 
   steps:
