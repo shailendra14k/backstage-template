@@ -28,5 +28,4 @@ metadata:
 spec:
   type: service
   owner: ${{values.owner | dump}}
-  system: workshop-camel-demo
   lifecycle: demo
