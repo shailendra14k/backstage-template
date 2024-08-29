@@ -1,0 +1,15 @@
+- route:
+    id: route-5711
+    from:
+      id: from-3753
+      uri: rest:get:/demo
+      steps:
+        - setBody:
+            simple: '{"FlightID": "${random(1000)}","Airline": "Indigo","FlightNumber": "6E2286","OperatedBy": "IndiGo Airlines","From": "Ranchi","To": "Delhi"}'
+        - log:
+            id: log-9575
+            message: "${body}"
+        - to:
+            uri: "xj:json2xml.xsl?transformDirection=JSON2XML"
+        - to:
+            uri: "kafka:{{topicName.json}}"

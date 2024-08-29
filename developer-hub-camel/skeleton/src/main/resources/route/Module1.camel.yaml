@@ -1,0 +1,11 @@
+- route:
+    id: route-5711
+    from:
+      id: from-3753
+      uri: rest:get:/demo
+      steps:
+        - setBody:
+            simple: 'Hello World'
+        - log:
+            id: log-9575
+            message: "${body}"

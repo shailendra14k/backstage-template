@@ -1,0 +1,66 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: ${{ values.appName }}
+spec:
+  params:
+    - description: branch
+      name: git-revision
+      type: string
+      default: master
+  tasks:
+    - name: git-clone
+      params:
+        - name: url
+          value: ${{ values.url }}
+        - name: revision
+          value: $(params.git-revision)
+        - name: sslVerify
+          value: 'false'
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: source-dir
+    - name: maven
+      params:
+        - name: GOALS
+          value:
+            - package
+        - name: PROXY_PROTOCOL
+          value: http
+        - name: CONTEXT_DIR
+          value: .
+      runAfter:
+        - git-clone
+      taskRef:
+        kind: Task
+        name: maven-java21
+      workspaces:
+        - name: source
+          workspace: source-dir
+        - name: maven
+          workspace: mvn-dir
+    - name: s2i-java
+      params:
+        - name: CONTEXT
+          value: .
+        - name: TLSVERIFY
+          value: 'false'
+        - name: MAVEN_CLEAR_REPO
+          value: 'false'
+        - name: IMAGE
+          value: >-
+            ${{ values.registryUrl }}/${{ values.appName }}/${{ values.appName }}:1.0
+      runAfter:
+        - maven
+      taskRef:
+        kind: ClusterTask
+        name: buildah
+      workspaces:
+        - name: source
+          workspace: source-dir
+  workspaces:
+    - name: source-dir
+    - name: mvn-dir
