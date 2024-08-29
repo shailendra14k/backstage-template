@@ -105,7 +105,7 @@ spec:
       name: Create GitHub Webhook
       action: github:webhook
       input:
-        repoUrl: github.com?repo=${{ parameters.appName }}&owner=shailendra14k
+        repoUrl: github.com?repo=${{ parameters.component_id }}&owner=shailendra14k
         webhookUrl: https://el-${{ parameters.component_id }}-${{ parameters.component_id }}.${{ parameters.clusterDomain }}
 
     - id: create-argocd-resources
