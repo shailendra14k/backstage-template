@@ -57,7 +57,7 @@ spec:
         url: ./skeleton
         values:
           appName: ${{ parameters.component_id }}
-          owner: ${{ user.entity.metadata.name }}
+          owner: shailendra14k
           cluster: .${{ parameters.clusterDomain }}
           host: github.com
           destination: shailendra14/${{ parameters.component_id }}
@@ -88,7 +88,7 @@ spec:
           registryUrl: ${{ parameters.registryUrl }}
           repoBranchName: ${{ parameters.repoBranchName }}
           cluster: .${{ parameters.clusterDomain }}
-          git_owner: ${{ parameters.owner }}
+          git_owner: shailendra14k
           url: https://github.com/shailendra14k/${{parameters.component_id}}.git
           repoUrl: https://github.com/shailendra14k/${{parameters.component_id}}-config.git
         targetPath: ./gitops

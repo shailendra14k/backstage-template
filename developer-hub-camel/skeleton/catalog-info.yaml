@@ -27,5 +27,5 @@ metadata:
     - renovate
 spec:
   type: service
-  owner: ${{values.owner | dump}}
+  owner: shailendra14k
   lifecycle: demo
