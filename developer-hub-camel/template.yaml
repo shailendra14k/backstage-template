@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: camel-on-openshift-template
-  title: Create a Camel app for OpenShift
+  title: Create a Camel app for OpenShift with DeveloperHub
   description: Create a Camel app for OpenShift
   tags:
     - spring-boot
