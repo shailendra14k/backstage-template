@@ -2,7 +2,7 @@ apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
   name: camel-on-openshift-template
-  title: Create a Camel app for OpenShift with DeveloperHub
+  title: Create a Camel app for OpenShift with Developer-Hub
   description: Create a Camel app for OpenShift
   tags:
     - spring-boot
@@ -60,7 +60,7 @@ spec:
           owner: shailendra14k
           cluster: .${{ parameters.clusterDomain }}
           host: github.com
-          destination: shailendra14/${{ parameters.component_id }}
+          destination: shailendra14k/${{ parameters.component_id }}
           
     - id: publish
       name: Publishing to the Source Code Repository
